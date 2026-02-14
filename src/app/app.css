@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Global pointer cursor */
+button,
+a,
+[role='button'],
+[role='link'],
+input[type='button'],
+input[type='submit'],
+input[type='reset'],
+[tabindex]:not([tabindex='-1']) {
+  cursor: pointer;
+}
+
+/* App Layout Structure */
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+app-nav {
+  flex-shrink: 0;
+}
+
+.app-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+app-side-menu {
+  flex-shrink: 0;
+}
+
+.app-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+
+router-outlet {
+  flex: 1;
+}
+
+app-footer {
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .app-layout {
+    flex-direction: row;
+  }
+
+  app-side-menu {
+    position: fixed;
+    left: 0;
+    top: 80px;
+    height: calc(100vh - 80px);
+    z-index: 1000;
+  }
+
+  .app-content {
+    width: 100%;
+    margin-left: 0;
+  }
+}

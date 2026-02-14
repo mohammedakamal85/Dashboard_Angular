@@ -1,0 +1,246 @@
+<div class="profile-container">
+    <!-- Admin Profile View -->
+    @if (isAdmin && authState.user) {
+    <div class="profile-header admin-header">
+        <div class="header-content">
+            <h1 class="profile-title">👨‍💼 Admin Profile</h1>
+            <p class="profile-subtitle">Full system access and administrative controls</p>
+        </div>
+        <div class="header-icon">🛡️</div>
+    </div>
+
+    <div class="profile-content">
+        <!-- Admin Info Card -->
+        <div class="info-card admin-card">
+            <div class="card-header">
+                <h2 class="card-title">🔐 Administrator Information</h2>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <label class="info-label">Name</label>
+                    <p class="info-value">{{ authState.user.name }}</p>
+                </div>
+                <div class="info-item">
+                    <label class="info-label">Email</label>
+                    <p class="info-value">{{ authState.user.email }}</p>
+                </div>
+                <div class="info-item">
+                    <label class="info-label">Role</label>
+                    <p class="info-value">
+                        <span class="role-badge admin-badge">Admin</span>
+                    </p>
+                </div>
+                <div class="info-item">
+                    <label class="info-label">Status</label>
+                    <p class="info-value">
+                        <span class="status-badge active">🟢 Active</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Stats -->
+        <div class="stats-grid">
+            <div class="stat-box admin-stat-1">
+                <div class="stat-icon">👥</div>
+                <div class="stat-info">
+                    <p class="stat-label">Total Users</p>
+                    <p class="stat-number">1,234</p>
+                </div>
+            </div>
+            <div class="stat-box admin-stat-2">
+                <div class="stat-icon">📊</div>
+                <div class="stat-info">
+                    <p class="stat-label">Total Orders</p>
+                    <p class="stat-number">5,678</p>
+                </div>
+            </div>
+            <div class="stat-box admin-stat-3">
+                <div class="stat-icon">💰</div>
+                <div class="stat-info">
+                    <p class="stat-label">Revenue</p>
+                    <p class="stat-number">$456.8K</p>
+                </div>
+            </div>
+            <div class="stat-box admin-stat-4">
+                <div class="stat-icon">⚙️</div>
+                <div class="stat-info">
+                    <p class="stat-label">System Health</p>
+                    <p class="stat-number">98%</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Permissions -->
+        <div class="permissions-card">
+            <div class="card-header">
+                <h2 class="card-title">🔑 Permissions</h2>
+            </div>
+            <div class="permissions-list">
+                <div class="permission-item">
+                    <span class="permission-check">✅</span>
+                    <p class="permission-text">View all users and manage accounts</p>
+                </div>
+                <div class="permission-item">
+                    <span class="permission-check">✅</span>
+                    <p class="permission-text">Access system analytics and reports</p>
+                </div>
+                <div class="permission-item">
+                    <span class="permission-check">✅</span>
+                    <p class="permission-text">Configure system settings</p>
+                </div>
+                <div class="permission-item">
+                    <span class="permission-check">✅</span>
+                    <p class="permission-text">Manage orders and transactions</p>
+                </div>
+                <div class="permission-item">
+                    <span class="permission-check">✅</span>
+                    <p class="permission-text">Access audit logs</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logout Button -->
+        <div class="action-section">
+            <button class="logout-btn admin-logout" (click)="logout()">🚪 Logout</button>
+        </div>
+    </div>
+    }
+
+    <!-- Customer Profile View -->
+    @if (isCustomer && authState.user) {
+    <div class="profile-header customer-header">
+        <div class="header-content">
+            <h1 class="profile-title">👤 My Profile</h1>
+            <p class="profile-subtitle">Manage your account and preferences</p>
+        </div>
+        <div class="header-icon">💳</div>
+    </div>
+
+    <div class="profile-content">
+        <!-- Customer Info Card -->
+        <div class="info-card customer-card">
+            <div class="card-header">
+                <h2 class="card-title">👤 Personal Information</h2>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <label class="info-label">Name</label>
+                    <p class="info-value">{{ authState.user.name }}</p>
+                </div>
+                <div class="info-item">
+                    <label class="info-label">Email</label>
+                    <p class="info-value">{{ authState.user.email }}</p>
+                </div>
+                <div class="info-item">
+                    <label class="info-label">Account Type</label>
+                    <p class="info-value">
+                        <span class="role-badge customer-badge">Regular Member</span>
+                    </p>
+                </div>
+                <div class="info-item">
+                    <label class="info-label">Member Since</label>
+                    <p class="info-value">Jan 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Stats -->
+        <div class="stats-grid">
+            <div class="stat-box customer-stat-1">
+                <div class="stat-icon">📦</div>
+                <div class="stat-info">
+                    <p class="stat-label">Total Orders</p>
+                    <p class="stat-number">24</p>
+                </div>
+            </div>
+            <div class="stat-box customer-stat-2">
+                <div class="stat-icon">💰</div>
+                <div class="stat-info">
+                    <p class="stat-label">Total Spent</p>
+                    <p class="stat-number">$2,450</p>
+                </div>
+            </div>
+            <div class="stat-box customer-stat-3">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-info">
+                    <p class="stat-label">Loyalty Points</p>
+                    <p class="stat-number">1,250</p>
+                </div>
+            </div>
+            <div class="stat-box customer-stat-4">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-info">
+                    <p class="stat-label">Achievements</p>
+                    <p class="stat-number">12</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="orders-card">
+            <div class="card-header">
+                <h2 class="card-title">📦 Recent Orders</h2>
+            </div>
+            <div class="orders-list">
+                <div class="order-item">
+                    <div class="order-header">
+                        <span class="order-id">Order #2024-001</span>
+                        <span class="order-badge success">Delivered</span>
+                    </div>
+                    <p class="order-date">Delivered on Feb 10, 2024</p>
+                </div>
+                <div class="order-item">
+                    <div class="order-header">
+                        <span class="order-id">Order #2024-002</span>
+                        <span class="order-badge processing">In Transit</span>
+                    </div>
+                    <p class="order-date">Expected on Feb 16, 2024</p>
+                </div>
+                <div class="order-item">
+                    <div class="order-header">
+                        <span class="order-id">Order #2024-003</span>
+                        <span class="order-badge processing">Processing</span>
+                    </div>
+                    <p class="order-date">Processing since Feb 12, 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preferences -->
+        <div class="preferences-card">
+            <div class="card-header">
+                <h2 class="card-title">⚙️ Preferences</h2>
+            </div>
+            <div class="preferences-list">
+                <div class="preference-item">
+                    <div class="preference-info">
+                        <p class="preference-name">Email Notifications</p>
+                        <p class="preference-desc">Receive order updates via email</p>
+                    </div>
+                    <input type="checkbox" class="preference-toggle" checked title="Email Notifications" />
+                </div>
+                <div class="preference-item">
+                    <div class="preference-info">
+                        <p class="preference-name">SMS Alerts</p>
+                        <p class="preference-desc">Receive SMS for important updates</p>
+                    </div>
+                    <input type="checkbox" class="preference-toggle" checked title="SMS Alerts" />
+                </div>
+                <div class="preference-item">
+                    <div class="preference-info">
+                        <p class="preference-name">Marketing Emails</p>
+                        <p class="preference-desc">Receive promotional offers</p>
+                    </div>
+                    <input type="checkbox" class="preference-toggle" title="Marketing Emails" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Logout Button -->
+        <div class="action-section">
+            <button class="logout-btn customer-logout" (click)="logout()">🚪 Logout</button>
+        </div>
+    </div>
+    }
+</div>

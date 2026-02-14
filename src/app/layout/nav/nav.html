@@ -1,0 +1,19 @@
+<nav class="nav">
+    <h1 class="logo">📊 Dashboard</h1>
+    <ul class="nav-links">
+        <li><a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+        <li><a routerLink="/dashboard" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">Dashboard</a></li>
+
+        @if (!authState.isAuthenticated) {
+        <li><a routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Login</a></li>
+        <li><a routerLink="/register" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Register</a>
+        </li>
+        }
+
+        @if (authState.isAuthenticated) {
+        <li><a routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">👤 {{
+                authState.user?.name }}</a></li>
+        }
+    </ul>
+</nav>

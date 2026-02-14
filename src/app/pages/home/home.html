@@ -1,0 +1,98 @@
+<div class="home-container">
+    <div class="home-header">
+        <h1>Welcome to Dashboard</h1>
+        <p class="subtitle">Your all-in-one analytics and management platform</p>
+    </div>
+
+    @if (!authState.isAuthenticated) {
+    <!-- Unauthenticated View -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <h2>Get Started Today</h2>
+            <p>Sign in to access powerful analytics, dashboards, and management tools.</p>
+            <div class="cta-buttons">
+                <a routerLink="/login" class="btn btn-primary">Sign In</a>
+                <a routerLink="/register" class="btn btn-secondary">Create Account</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Analytics Dashboard</h3>
+            <p>Real-time insights into your data with beautiful visualizations</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">👥</div>
+            <h3>Customer Management</h3>
+            <p>Manage and track your customers with ease</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⚙️</div>
+            <h3>Admin Controls</h3>
+            <p>Full administrative access (for admins only)</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Secure & Reliable</h3>
+            <p>Enterprise-grade security for your peace of mind</p>
+        </div>
+    </div>
+    }
+
+    @if (authState.isAuthenticated && authState.role === 'admin') {
+    <!-- Admin View -->
+    <div class="welcome-section">
+        <h2>Welcome, Admin 👋</h2>
+        <p>You have full access to all features and dashboards.</p>
+        <div class="dashboard-links">
+            <a routerLink="/admin" class="dashboard-link">
+                <span class="icon">⚙️</span>
+                <div>
+                    <p class="title">Admin Dashboard</p>
+                    <p class="description">System overview & analytics</p>
+                </div>
+            </a>
+            <a routerLink="/dashboard" class="dashboard-link">
+                <span class="icon">📈</span>
+                <div>
+                    <p class="title">Main Dashboard</p>
+                    <p class="description">Shared analytics & reports</p>
+                </div>
+            </a>
+            <a routerLink="/customer" class="dashboard-link">
+                <span class="icon">👥</span>
+                <div>
+                    <p class="title">Customers</p>
+                    <p class="description">Customer management system</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    }
+
+    @if (authState.isAuthenticated && authState.role === 'customer') {
+    <!-- Customer View -->
+    <div class="welcome-section">
+        <h2>Welcome, {{ authState.user?.name }} 👋</h2>
+        <p>Your personalized dashboard is ready. Explore your analytics and manage your resources.</p>
+        <div class="dashboard-links">
+            <a routerLink="/dashboard" class="dashboard-link">
+                <span class="icon">📈</span>
+                <div>
+                    <p class="title">Dashboard</p>
+                    <p class="description">Your analytics & performance metrics</p>
+                </div>
+            </a>
+            <a routerLink="/customer" class="dashboard-link">
+                <span class="icon">👥</span>
+                <div>
+                    <p class="title">Customers</p>
+                    <p class="description">Manage customer data</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    }
+</div>

@@ -1,0 +1,149 @@
+<div class="customer-dashboard">
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+        <div class="welcome-content">
+            <h1 class="welcome-title">{{ greeting }}, {{ userName }}! 👋</h1>
+            <p class="welcome-subtitle">Here's your shopping summary and activity overview</p>
+        </div>
+    </div>
+
+    <!-- Cards Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            @for (card of statCards; track $index) {
+            <div class="stat-card" [style.--card-index]="$index" [style.--card-color]="card.color">
+                <div class="stat-icon">{{ card.icon }}</div>
+                <div class="stat-content">
+                    <p class="stat-title">{{ card.title }}</p>
+                    <div class="stat-value-group">
+                        <h3 class="stat-value">{{ card.value }}</h3>
+                        @if (card.unit) {
+                        <span class="stat-unit">{{ card.unit }}</span>
+                        }
+                    </div>
+                </div>
+                <div class="stat-bg"></div>
+            </div>
+            }
+        </div>
+    </section>
+
+    <!-- Charts Section -->
+    <section class="charts-section">
+        <div class="chart-container">
+            <div class="chart-header">
+                <h2 class="chart-title">Order Status Distribution</h2>
+                <p class="chart-subtitle">{{ totalOrders }} total orders</p>
+            </div>
+
+            <div class="chart-wrapper">
+                <svg class="pie-chart" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    @for (item of pieChartData; track $index) {
+                    @let slice = calculatePieSlice($index, 100, 100, 70);
+                    <path [attr.d]="slice.path" [attr.fill]="item.color" class="pie-slice"
+                        [style.--animation-delay]="($index * 100) + 'ms'" />
+                    }
+                </svg>
+
+                <!-- Pie Chart -->
+                <div class="chart-legend">
+                    @for (item of pieChartData; track $index) {
+                    <div class="legend-item" [style.--legend-delay]="($index * 100) + 'ms'">
+                        <div class="legend-color" [style.background-color]="item.color"></div>
+                        <div class="legend-text">
+                            <p class="legend-label">{{ item.label }}</p>
+                            <p class="legend-value">{{ item.value }} ({{ item.percentage | number : '1.0-0' }}%)</p>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="quick-stat-header">
+                <h2 class="quick-stat-title">Quick Insights</h2>
+            </div>
+
+            <div class="insights-list">
+                <div class="insight-item insight-item-1">
+                    <div class="insight-icon">✅</div>
+                    <div class="insight-text">
+                        <p class="insight-name">Delivery Success</p>
+                        <p class="insight-value">67% of orders delivered</p>
+                    </div>
+                </div>
+
+                <div class="insight-item insight-item-2">
+                    <div class="insight-icon">⏳</div>
+                    <div class="insight-text">
+                        <p class="insight-name">Active Orders</p>
+                        <p class="insight-value">5 orders in progress</p>
+                    </div>
+                </div>
+
+                <div class="insight-item insight-item-3">
+                    <div class="insight-icon">🎯</div>
+                    <div class="insight-text">
+                        <p class="insight-name">Member Status</p>
+                        <p class="insight-value">Premium Member</p>
+                    </div>
+                </div>
+
+                <div class="insight-item insight-item-4">
+                    <div class="insight-icon">🚀</div>
+                    <div class="insight-text">
+                        <p class="insight-name">Next Reward</p>
+                        <p class="insight-value">250 points away</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activity Section -->
+    <section class="activity-section">
+        <div class="activity-header">
+            <h2 class="activity-title">Recent Activity</h2>
+        </div>
+
+        <div class="activity-timeline">
+            <div class="timeline-item timeline-item-1">
+                <div class="timeline-marker">📦</div>
+                <div class="timeline-content">
+                    <p class="timeline-date">Today at 2:30 PM</p>
+                    <p class="timeline-event">Order #2024-001 delivered successfully</p>
+                    <span class="timeline-badge success">Completed</span>
+                </div>
+            </div>
+
+            <div class="timeline-item timeline-item-2">
+                <div class="timeline-marker">🚚</div>
+                <div class="timeline-content">
+                    <p class="timeline-date">Yesterday</p>
+                    <p class="timeline-event">Order #2024-002 shipped and on the way</p>
+                    <span class="timeline-badge processing">In Transit</span>
+                </div>
+            </div>
+
+            <div class="timeline-item timeline-item-3">
+                <div class="timeline-marker">💳</div>
+                <div class="timeline-content">
+                    <p class="timeline-date">2 days ago</p>
+                    <p class="timeline-event">Payment received for order #2024-003</p>
+                    <span class="timeline-badge success">Confirmed</span>
+                </div>
+            </div>
+
+            <div class="timeline-item timeline-item-4">
+                <div class="timeline-marker">⭐</div>
+                <div class="timeline-content">
+                    <p class="timeline-date">3 days ago</p>
+                    <p class="timeline-event">You earned 100 loyalty points</p>
+                    <span class="timeline-badge reward">Reward</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

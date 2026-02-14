@@ -1,0 +1,100 @@
+<!-- Overlay for mobile menu -->
+@if (isMobile && isMenuOpen) {
+<div class="menu-overlay" (click)="closeOverlay()" role="button" tabindex="-1" aria-label="Close menu"></div>
+}
+
+<!-- Mobile menu -->
+@if (isMobile && !isMenuOpen) {
+<button class="mobile-hamburger" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen"
+    [attr.aria-label]="isMenuOpen ? 'Close menu' : 'Open menu'" title="Open menu">
+    📊
+</button>
+}
+
+<!-- Side Menu -->
+<aside class="side-menu" [class.collapsed]="isCollapsed" [class.open]="isMenuOpen">
+    <div class="side-menu-header">
+        <div class="logo-container">
+            <div class="logo-icon" (click)="toggleMenu()" role="button" tabindex="0"
+                [attr.aria-expanded]="isMobile ? isMenuOpen : !isCollapsed" title="Toggle menu">📊</div>
+            @if (!isCollapsed && !isMobile) {
+            <h2 class="menu-title">Dashboard</h2>
+            }
+        </div>
+    </div>
+
+    <div class="side-menu-content">
+        <nav class="side-menu-nav">
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                        class="menu-link" (click)="closeMenu()">
+                        <span class="menu-icon">🏠</span>
+                        @if (!isCollapsed && !isMobile) {
+                        <span class="menu-label">Home</span>
+                        }
+                        @if (isMobile) {
+                        <span class="menu-label">Home</span>
+                        }
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                        class="menu-link" (click)="closeMenu()">
+                        <span class="menu-icon">📈</span>
+                        @if (!isCollapsed && !isMobile) {
+                        <span class="menu-label">Dashboard</span>
+                        }
+                        @if (isMobile) {
+                        <span class="menu-label">Dashboard</span>
+                        }
+                    </a>
+                </li>
+                <li class="menu-item">
+                    @if (authState.isAuthenticated && authState.role === 'admin') {
+                    <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                        class="menu-link" (click)="closeMenu()">
+                        <span class="menu-icon">⚙️</span>
+                        @if (!isCollapsed && !isMobile) {
+                        <span class="menu-label">Admin</span>
+                        }
+                        @if (isMobile) {
+                        <span class="menu-label">Admin</span>
+                        }
+                    </a>
+                    }
+                </li>
+                <li class="menu-item">
+                    @if (authState.isAuthenticated) {
+                    <a routerLink="/customer" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                        class="menu-link" (click)="closeMenu()">
+                        <span class="menu-icon">👥</span>
+                        @if (!isCollapsed && !isMobile) {
+                        <span class="menu-label">Customers</span>
+                        }
+                        @if (isMobile) {
+                        <span class="menu-label">Customers</span>
+                        }
+                    </a>
+                    }
+                </li>
+            </ul>
+        </nav>
+
+        @if (authState.isAuthenticated) {
+        <div class="side-menu-footer">
+            <p class="version-text">v 1.0.0</p>
+            <hr class="divider">
+            <button class="logout-btn" (click)="logout()">
+                <span class="menu-icon">🚪</span>
+                @if (!isCollapsed && !isMobile) {
+                <span class="menu-label">Logout</span>
+                }
+                @if (isMobile) {
+                <span class="menu-label">Logout</span>
+                }
+            </button>
+        </div>
+        }
+    </div>
+</aside>

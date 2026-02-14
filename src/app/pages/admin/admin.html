@@ -1,0 +1,107 @@
+<div class="admin-container">
+    <!-- Header -->
+    <div class="admin-header">
+        <h1>Admin Dashboard</h1>
+        <p class="subtitle">System Overview & Analytics</p>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+        <div *ngFor="let stat of stats; let i = index" class="stat-card" [style.--delay]="i * 0.1 + 's'">
+            <div class="stat-icon">{{ stat.icon }}</div>
+            <div class="stat-content">
+                <p class="stat-label">{{ stat.label }}</p>
+                <p class="stat-value">{{ stat.value }}</p>
+                <span class="stat-change">{{ stat.change }} from last month</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="dashboard-grid">
+        <div class="chart-card">
+            <h2 class="card-title">Subscription Distribution</h2>
+            <div class="chart-container">
+                <svg class="pie-chart" viewBox="0 0 200 200">
+                    <circle class="pie-bg" cx="100" cy="100" r="95"></circle>
+                    <circle *ngFor="let segment of pieChartData.values; let i = index" class="pie-segment" cx="100"
+                        cy="100" r="85" [attr.stroke]="pieChartData.colors[i]"
+                        [attr.stroke-dasharray]="calculatePieSegment(pieChartData.values[i], getPieChartTotal()) * 5.34"
+                        [attr.stroke-dashoffset]="calculateStrokeDashOffset(i)" [style.--index]="i"></circle>
+                </svg>
+                <div class="chart-legend">
+                    <div *ngFor="let label of pieChartData.labels; let i = index" class="legend-item">
+                        <span class="legend-color" [style.backgroundColor]="pieChartData.colors[i]"></span>
+                        <span class="legend-label">{{ label }}</span>
+                        <span class="legend-value">{{ pieChartData.values[i] }}%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats-card">
+            <h2 class="card-title">Quick Stats</h2>
+            <div class="quick-stats">
+                <div class="quick-stat-item">
+                    <span class="quick-stat-label">New Users (Today)</span>
+                    <span class="quick-stat-value">24</span>
+                </div>
+                <div class="quick-stat-item">
+                    <span class="quick-stat-label">Avg. Session Duration</span>
+                    <span class="quick-stat-value">12m 42s</span>
+                </div>
+                <div class="quick-stat-item">
+                    <span class="quick-stat-label">Page Load Time</span>
+                    <span class="quick-stat-value">1.23s</span>
+                </div>
+                <div class="quick-stat-item">
+                    <span class="quick-stat-label">Error Rate</span>
+                    <span class="quick-stat-value">0.02%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Users Table -->
+    <div class="table-card">
+        <h2 class="card-title">Recent Users</h2>
+        <div class="table-wrapper">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Join Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of recentUsers" class="table-row">
+                        <td class="user-name">{{ user.name }}</td>
+                        <td class="user-email">{{ user.email }}</td>
+                        <td>
+                            <span class="role-badge" [class.admin]="user.role === 'Admin'"
+                                [class.mod]="user.role === 'Moderator'">
+                                {{ user.role }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="status-badge" [class.active]="user.status === 'Active'"
+                                [class.inactive]="user.status === 'Inactive'">
+                                {{ user.status }}
+                            </span>
+                        </td>
+                        <td class="join-date">{{ user.joinDate }}</td>
+                        <td class="actions">
+                            <button class="action-btn edit-btn" title="Edit">✎</button>
+                            <button class="action-btn delete-btn" title="Delete">✕</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
